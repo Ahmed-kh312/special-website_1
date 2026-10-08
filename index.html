@@ -1,0 +1,725 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For You ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050509;
+    color:white;
+    font-family:Arial, sans-serif;
+    overflow-x:hidden;
+}
+
+/* BACKGROUND */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at 20% 20%,rgba(255,50,120,.13),transparent 30%),
+    radial-gradient(circle at 80% 80%,rgba(130,60,255,.12),transparent 30%);
+    z-index:-3;
+}
+
+/* STARS */
+
+.stars{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-2;
+}
+
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    border-radius:50%;
+    opacity:.5;
+    animation:twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{opacity:.15}
+    to{opacity:1}
+}
+
+/* HEARTS */
+
+.heart{
+    position:fixed;
+    bottom:-30px;
+    color:#ff5d98;
+    pointer-events:none;
+    animation:floatHeart linear forwards;
+    z-index:10;
+}
+
+@keyframes floatHeart{
+    from{
+        transform:translateY(0) rotate(0);
+        opacity:0;
+    }
+    20%{opacity:.7}
+    to{
+        transform:translateY(-110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+/* INTRO */
+
+.intro{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:25px;
+}
+
+.intro-box{
+    max-width:800px;
+}
+
+.mini{
+    color:#ff6fa5;
+    letter-spacing:5px;
+    font-size:14px;
+    margin-bottom:25px;
+}
+
+.intro h1{
+    font-size:clamp(45px,9vw,100px);
+    background:linear-gradient(90deg,#fff,#ff6da5,#b86cff);
+    -webkit-background-clip:text;
+    color:transparent;
+    margin-bottom:25px;
+}
+
+#typing{
+    color:#ccc;
+    font-size:21px;
+    min-height:35px;
+}
+
+.enter{
+    margin-top:45px;
+    display:inline-block;
+    padding:16px 35px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:50px;
+    color:white;
+    text-decoration:none;
+    transition:.4s;
+}
+
+.enter:hover{
+    background:#ff4f91;
+    transform:scale(1.08);
+    box-shadow:0 0 30px rgba(255,70,140,.4);
+}
+
+/* MESSAGE */
+
+.message{
+    min-height:80vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:60px 20px;
+}
+
+.message-box{
+    max-width:850px;
+    text-align:center;
+    padding:60px 35px;
+    border-radius:30px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.1);
+    backdrop-filter:blur(15px);
+}
+
+.message-box h2{
+    color:#ff6fa5;
+    font-size:42px;
+    margin-bottom:30px;
+}
+
+.message-box p{
+    color:#ddd;
+    font-size:20px;
+    line-height:2.1;
+}
+
+/* GALLERY */
+
+.gallery-section{
+    padding:100px 6%;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:70px;
+}
+
+.title h2{
+    font-size:50px;
+    margin-bottom:15px;
+}
+
+.title p{
+    color:#888;
+    font-size:17px;
+}
+
+.gallery{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:30px;
+}
+
+.card{
+    height:400px;
+    position:relative;
+    overflow:hidden;
+    border-radius:28px;
+    background:#111;
+    border:1px solid rgba(255,255,255,.1);
+    transition:.6s;
+    opacity:0;
+    transform:translateY(60px);
+}
+
+.card.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.card:hover{
+    transform:translateY(-12px) scale(1.025);
+    box-shadow:0 25px 60px rgba(255,50,130,.2);
+}
+
+.card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:1s;
+}
+
+.card:hover img{
+    transform:scale(1.1);
+}
+
+.number{
+    position:absolute;
+    top:18px;
+    right:18px;
+    width:48px;
+    height:48px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:50%;
+    background:rgba(0,0,0,.65);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.2);
+    font-size:18px;
+}
+
+.caption{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:70px 20px 25px;
+    background:linear-gradient(transparent,rgba(0,0,0,.95));
+}
+
+.caption h3{
+    font-size:22px;
+    margin-bottom:7px;
+}
+
+.caption p{
+    color:#bbb;
+}
+
+/* FINAL */
+
+.final{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:30px;
+}
+
+.final-box{
+    max-width:750px;
+}
+
+.final-box .big-heart{
+    font-size:70px;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.18)}
+}
+
+.final-box h2{
+    font-size:clamp(40px,7vw,70px);
+    margin:25px 0;
+    background:linear-gradient(90deg,#ff6fa5,#bd7cff);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.final-box p{
+    color:#ccc;
+    font-size:20px;
+    line-height:2;
+}
+
+.secret-btn{
+    margin-top:40px;
+    border:none;
+    padding:17px 38px;
+    border-radius:50px;
+    background:linear-gradient(90deg,#ff4f91,#9d5cff);
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    transition:.4s;
+}
+
+.secret-btn:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 40px rgba(255,70,150,.4);
+}
+
+.secret{
+    display:none;
+    margin-top:35px;
+    color:#ff82ae;
+    font-size:24px;
+    animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+footer{
+    text-align:center;
+    color:#555;
+    padding:30px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .message-box{
+        padding:40px 22px;
+    }
+
+    .message-box h2{
+        font-size:34px;
+    }
+
+    .message-box p{
+        font-size:17px;
+    }
+
+    .card{
+        height:430px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- STARS -->
+<div class="stars" id="stars"></div>
+
+
+<!-- INTRO -->
+<section class="intro">
+
+    <div class="intro-box">
+
+        <div class="mini">
+            SOMETHING SPECIAL
+        </div>
+
+        <h1>For You ❤️</h1>
+
+        <div id="typing"></div>
+
+        <a href="#message" class="enter">
+            Start the story ↓
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- MESSAGE -->
+<section class="message" id="message">
+
+    <div class="message-box">
+
+        <h2>رسالة صغيرة 💌</h2>
+
+        <p>
+            في حاجات كتير صعب تتقال بالكلام...
+
+            <br><br>
+
+            وفي أشخاص وجودهم في حياتنا
+            بيخلّي تفاصيل عادية جدًا
+            تتحول لذكريات جميلة.
+
+            <br><br>
+
+            عشان كده عملت المكان ده...
+
+            <br><br>
+
+            مش عشان أقول كلام كبير،
+            لكن عشان أحتفظ هنا بشوية
+            من اللحظات اللي تستاهل تتفضل فاكرينها. ❤️
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- PHOTOS -->
+
+<section class="gallery-section">
+
+    <div class="title">
+
+        <h2>10 Memories</h2>
+
+        <p>
+            كل رقم هنا وراه لحظة ❤️
+        </p>
+
+    </div>
+
+
+    <div class="gallery">
+
+        <div class="card">
+            <img src="images/1.jpg">
+            <div class="number">01</div>
+            <div class="caption">
+                <h3>البداية</h3>
+                <p>كل حكاية جميلة لازم يكون ليها بداية.</p>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <img src="images/2.jpg">
+            <div class="number">02</div>
+            <div class="caption">
+                <h3>لحظة</h3>
+                <p>لحظة صغيرة بس فضلت في الذاكرة.</p>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <img src="images/3.jpg">
+            <div class="number">03</div>
+            <div class="caption">
+                <h3>ضحكة</h3>
+                <p>بعض الضحكات تستاهل تتصور.</p>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <img src="images/4.jpg">
+            <div class="number">04</div>
+            <div class="caption">
+                <h3>تفصيلة</h3>
+                <p>تفاصيل بسيطة بتعمل ذكريات كبيرة.</p>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <img src="images/5.jpg">
+            <div class="number">05</div>
+            <div class="caption">
+                <h3>وقت جميل</h3>
+                <p>من اللحظات اللي الواحد يتمنى تعيش أكتر.</p>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <img src="images/6.jpg">
+            <div class="number">06</div>
+            <div class="caption">
+                <h3>ذكرى</h3>
+                <p>وكل ذكرى حلوة ليها مكان خاص.</p>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <img src="images/7.jpg">
+            <div class="number">07</div>
+            <div class="caption">
+                <h3>ابتسامة</h3>
+                <p>ابتسامة واحدة ممكن تغيّر يوم كامل.</p>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <img src="images/8.jpg">
+            <div class="number">08</div>
+            <div class="caption">
+                <h3>لحظة تانية</h3>
+                <p>والحكاية لسه فيها حاجات كتير.</p>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <img src="images/9.jpg">
+            <div class="number">09</div>
+            <div class="caption">
+                <h3>قرب النهاية</h3>
+                <p>بس الذكريات الحلوة مبتخلصش.</p>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <img src="images/10.jpg">
+            <div class="number">10</div>
+            <div class="caption">
+                <h3>الأخيرة؟</h3>
+                <p>يمكن الأخيرة هنا... مش في الحكاية. ❤️</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FINAL -->
+
+<section class="final">
+
+    <div class="final-box">
+
+        <div class="big-heart">
+            ❤️
+        </div>
+
+        <h2>And the story continues...</h2>
+
+        <p>
+            عشر صور خلصوا...
+
+            <br>
+
+            بس أكيد لسه في صور كتير
+            وذكريات أكتر مستنيينها.
+        </p>
+
+        <button class="secret-btn" onclick="showSecret()">
+            One last thing...
+        </button>
+
+        <div class="secret" id="secret">
+            وجودك في حياتي من أجمل الحاجات
+            اللي حصلتلي. ❤️
+            <br><br>
+            Keep smiling.
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+    Made with ❤️
+</footer>
+
+
+<script>
+
+/* ==========================
+   TYPING EFFECT
+========================== */
+
+const text =
+"10 memories... 10 moments... and one special person.";
+
+let index = 0;
+
+function typing(){
+
+    if(index < text.length){
+
+        document.getElementById("typing").innerHTML +=
+        text.charAt(index);
+
+        index++;
+
+        setTimeout(typing,45);
+    }
+}
+
+typing();
+
+
+/* ==========================
+   STARS
+========================== */
+
+const stars =
+document.getElementById("stars");
+
+for(let i=0;i<120;i++){
+
+    const star =
+    document.createElement("div");
+
+    star.className="star";
+
+    star.style.left =
+    Math.random()*100+"%";
+
+    star.style.top =
+    Math.random()*100+"%";
+
+    star.style.animationDelay =
+    Math.random()*3+"s";
+
+    stars.appendChild(star);
+}
+
+
+/* ==========================
+   FLOATING HEARTS
+========================== */
+
+function createHeart(){
+
+    const heart =
+    document.createElement("div");
+
+    heart.className="heart";
+
+    heart.innerHTML="♥";
+
+    heart.style.left =
+    Math.random()*100+"%";
+
+    heart.style.fontSize =
+    (10+Math.random()*18)+"px";
+
+    heart.style.animationDuration =
+    (6+Math.random()*6)+"s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },12000);
+}
+
+setInterval(createHeart,700);
+
+
+/* ==========================
+   PHOTO ANIMATION
+========================== */
+
+const cards =
+document.querySelectorAll(".card");
+
+const observer =
+new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+},{
+    threshold:.15
+});
+
+cards.forEach(card=>{
+    observer.observe(card);
+});
+
+
+/* ==========================
+   SECRET MESSAGE
+========================== */
+
+function showSecret(){
+
+    document.getElementById("secret").style.display="block";
+
+}
+
+</script>
+
+</body>
+</html>
+```
